@@ -21,7 +21,7 @@ strings_es <- list(
   intro_lead = paste0(
     "Elegir cuántos participantes incluir en un estudio es una de las decisiones ",
     "metodológicas más importantes (y frecuentemente mal justificadas) en ",
-    "la investigación científica. El Just-N Framework ofrece una ruta estructurada ",
+    "la investigación científica. Just-N Framework ofrece una ruta estructurada ",
     "para tomar esa decisión de forma transparente y rigurosa, independientemente ",
     "de la disciplina o el diseño del estudio."
   ),
@@ -90,24 +90,21 @@ strings_es <- list(
   # Módulo: Monte Carlo
   mc_heading = "Simulaciones Monte Carlo",
   mc_lead = paste0(
-    "Cuando los paquetes de poder estadístico no cubren tu diseño, ",
-    "la simulación Monte Carlo permite estimar el poder empíricamente. ",
+    "Cuando los paquetes estándar como pwr no cubren tu diseño, hay dos opciones: ",
+    "paquetes especializados (como Superpower, para ANOVA factoriales) o simulación ",
+    "Monte Carlo para cualquier diseño personalizado. ",
     "Esta sección es educativa: el código se muestra pero no se ejecuta en la app."
   ),
-  mc_why_head = "¿Por qué simulaciones?",
-  mc_principle = "Principio general",
+  mc_superpower_head = "Opción 1 — Paquete especializado: Superpower (ANOVA factoriales)",
+  mc_why_head = "Opción 2 — Simulación Monte Carlo: para diseños sin paquete dedicado",
+  mc_principle = "Principio general de la simulación Monte Carlo",
   mc_example = "Ejemplo comentado en R",
-  mc_extension = "Extensión a diseños complejos",
+  mc_extension = "Extensión a otros diseños complejos",
 
   # Advertencias generales
   warn_cost = paste0(
     "⚠ Usar el costo o los recursos disponibles como único criterio para fijar N ",
     "es la estrategia menos deseable. Documenta claramente las limitaciones y ",
     "discute el impacto sobre la potencia del estudio."
-  ),
-  warn_power = paste0(
-    "⚠ El análisis de poder a priori basado en literatura requiere que el tamaño ",
-    "de efecto esperado sea realista. Evita inflar el efecto esperado para obtener ",
-    "un N conveniente."
   )
 )

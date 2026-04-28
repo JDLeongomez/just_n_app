@@ -27,7 +27,8 @@ source("R/mod_bibliography.R")
 # ── UI ──────────────────────────────────────────────────────────────────────
 
 ui <- page_navbar(
-  id    = "main_nav",
+  id           = "main_nav",
+  window_title = "Just-N Framework: Aplicación Interactiva",
   title = div(
     tags$img(src = "just-n-logo.svg", height = "38px", class = "me-2"),
     span(i18n("app_subtitle"), class = "text-muted small fw-normal")
@@ -96,6 +97,7 @@ ui <- page_navbar(
     title = "Cualitativo",
     icon = bsicons::bs_icon("people"),
     mod_tree_ui("tree_qual", initial_step = "qual"),
+    uiOutput("qual_detail_panel"),
     mod_qual_resources_ui("qual_res")
   ),
   nav_panel(
@@ -140,7 +142,18 @@ server <- function(input, output, session) {
       )
     }
   })
-  mod_tree_server("tree_qual", initial_step = "qual")
+
+  tree_qual_strategy <- mod_tree_server("tree_qual", initial_step = "qual")
+
+  output$qual_detail_panel <- renderUI({
+    strategy <- tree_qual_strategy()
+    req(strategy)
+    detail <- strategy_details_es[[strategy]]
+    if (!is.null(detail)) {
+      div(class = "container-lg py-2", detail())
+    }
+  })
+
   mod_qual_resources_server("qual_res")
   mod_mixed_server("mixed")
   mod_bibliography_server("bib")
@@ -166,176 +179,183 @@ server <- function(input, output, session) {
       )
     } else if (strategy == "sesoi") {
       mod_quant_ui("quant")
+
     } else if (strategy == "precision") {
-      div(
-        class = "container-lg py-4",
-        h2("Calculadora de precisión (IC)", class = "mb-1"),
-        p(
-          class = "text-muted mb-4",
-          "Calcula el N necesario para estimar una correlación de Pearson con
-           un ancho de intervalo de confianza deseado, usando la transformación
-           de Fisher-z."
-        ),
-        bslib::layout_columns(
-          col_widths = c(4, 8),
-          bslib::card(
-            bslib::card_header("Parámetros"),
-            bslib::card_body(
-              sliderInput("prec_epsilon",
-                HTML("Margen de error (&epsilon;) en escala <em>r</em>"),
-                min = 0.02, max = 0.30, value = 0.10, step = 0.01
-              ),
-              radioButtons("prec_conf", "Nivel de confianza",
-                choices = c("90 %" = 0.90, "95 %" = 0.95, "99 %" = 0.99),
-                selected = 0.95
-              )
-            )
+      tagList(
+        div(class = "container-lg py-2", strategy_details_es$precision()),
+        div(
+          class = "container-lg py-4",
+          h2("Calculadora de precisión (IC)", class = "mb-1"),
+          p(
+            class = "text-muted mb-4",
+            "Calcula el N necesario para estimar una correlación de Pearson con
+             un ancho de intervalo de confianza deseado, usando la transformación
+             de Fisher-z."
           ),
-          tagList(
-            uiOutput("precision_result_ui"),
-            div(
-              class = "alert alert-info small mt-3",
-              bsicons::bs_icon("info-circle"), " ",
-              "Para diferencias de medias, usa ",
-              tags$code("MBESS::ss.aipe.smd()"), " en R local.
-               La guía en el panel izquierdo incluye el código necesario."
+          bslib::layout_columns(
+            col_widths = c(4, 8),
+            bslib::card(
+              bslib::card_header("Parámetros"),
+              bslib::card_body(
+                sliderInput("prec_epsilon",
+                  HTML("Margen de error (&epsilon;) en escala <em>r</em>"),
+                  min = 0.02, max = 0.30, value = 0.10, step = 0.01
+                ),
+                radioButtons("prec_conf", "Nivel de confianza",
+                  choices = c("90 %" = 0.90, "95 %" = 0.95, "99 %" = 0.99),
+                  selected = 0.95
+                )
+              )
+            ),
+            tagList(
+              uiOutput("precision_result_ui"),
+              div(
+                class = "alert alert-info small mt-3",
+                bsicons::bs_icon("info-circle"), " ",
+                "Para diferencias de medias, usa ",
+                tags$code("MBESS::ss.aipe.smd()"), " en R local.
+                 La guía arriba incluye el código necesario."
+              )
             )
           )
         )
       )
+
     } else if (strategy == "cost") {
-      div(
-        class = "container-lg py-4",
-        h2("Calculadora inversa de poder", class = "mb-1"),
-        p(
-          class = "text-muted mb-4",
-          "Dado el N disponible, calcula el poder estadístico y el efecto
-           mínimo detectable (MDE)."
-        ),
-        bslib::layout_columns(
-          col_widths = c(4, 8),
-          bslib::card(
-            bslib::card_header("Parámetros"),
-            bslib::card_body(
-              selectInput("cost_design", "Diseño",
-                choices = c(
-                  `Prueba t independiente` = "t_ind",
-                  `Prueba t pareada`       = "t_paired",
-                  `Correlación de Pearson` = "corr",
-                  `ANOVA de una vía`       = "anova"
-                )
-              ),
-              numericInput("cost_n", "N disponible",
-                value = 30, min = 5, max = 10000, step = 5
-              ),
-              conditionalPanel(
-                condition = "input.cost_design == 'anova'",
-                numericInput("cost_groups", "Número de grupos",
-                  value = 3, min = 2, max = 20, step = 1
-                )
-              ),
-              div(
-                class = "row g-2",
-                div(
-                  class = "col-6",
-                  numericInput("cost_alpha", HTML("&alpha;"),
-                    value = 0.05, min = 0.001, max = 0.2, step = 0.005
+      tagList(
+        div(class = "container-lg py-2", strategy_details_es$cost()),
+        div(
+          class = "container-lg py-4",
+          h2("Calculadora inversa de poder", class = "mb-1"),
+          p(
+            class = "text-muted mb-4",
+            "Dado el N disponible, calcula el poder estadístico y el efecto
+             mínimo detectable (MDE)."
+          ),
+          bslib::layout_columns(
+            col_widths = c(4, 8),
+            bslib::card(
+              bslib::card_header("Parámetros"),
+              bslib::card_body(
+                selectInput("cost_design", "Diseño",
+                  choices = c(
+                    `Prueba t independiente` = "t_ind",
+                    `Prueba t pareada`       = "t_paired",
+                    `Correlación de Pearson` = "corr",
+                    `ANOVA de una vía`       = "anova"
+                  )
+                ),
+                numericInput("cost_n", "N disponible",
+                  value = 30, min = 5, max = 10000, step = 5
+                ),
+                conditionalPanel(
+                  condition = "input.cost_design == 'anova'",
+                  numericInput("cost_groups", "Número de grupos",
+                    value = 3, min = 2, max = 20, step = 1
                   )
                 ),
                 div(
-                  class = "col-6",
-                  numericInput("cost_effect",
-                    HTML("Efecto esperado<br><small class='text-muted'>d / r / f</small>"),
-                    value = 0.30, min = 0.01, max = 2.0, step = 0.01
+                  class = "row g-2",
+                  div(
+                    class = "col-6",
+                    numericInput("cost_alpha", HTML("&alpha;"),
+                      value = 0.05, min = 0.001, max = 0.2, step = 0.005
+                    )
+                  ),
+                  div(
+                    class = "col-6",
+                    numericInput("cost_effect",
+                      HTML("Efecto esperado<br><small class='text-muted'>d / r / f</small>"),
+                      value = 0.30, min = 0.01, max = 2.0, step = 0.01
+                    )
+                  )
+                )
+              )
+            ),
+            uiOutput("cost_result_ui")
+          )
+        )
+      )
+
+    } else if (strategy == "sequential") {
+      tagList(
+        div(class = "container-lg py-2", strategy_details_es$sequential()),
+        div(
+          class = "container-lg py-4",
+          div(
+            class = "alert alert-info d-flex gap-2 align-items-start",
+            bsicons::bs_icon("info-circle"),
+            div(
+              tags$strong("Los diseños secuenciales requieren paquetes no disponibles en WASM."),
+              " Usa ", tags$code("gsDesign"), " o ", tags$code("rpact"),
+              " en R local con el código de ejemplo en la guía arriba."
+            )
+          ),
+          bslib::card(
+            bslib::card_header("Recursos para diseños secuenciales"),
+            bslib::card_body(
+              tags$ul(
+                class = "mb-0",
+                tags$li(
+                  tags$code("gsDesign"), " — ",
+                  tags$a("keaven.github.io/gsDesign",
+                    href = "https://keaven.github.io/gsDesign/", target = "_blank"
+                  )
+                ),
+                tags$li(
+                  tags$code("rpact"), " — ",
+                  tags$a("www.rpact.org",
+                    href = "https://www.rpact.org", target = "_blank"
+                  )
+                ),
+                tags$li(
+                  "Tutorial AGILE: ",
+                  tags$a("doi.org/10.1186/s12874-022-01593-x",
+                    href = "https://doi.org/10.1186/s12874-022-01593-x",
+                    target = "_blank"
                   )
                 )
               )
             )
-          ),
-          uiOutput("cost_result_ui")
-        )
-      )
-    } else if (strategy == "sequential") {
-      div(
-        class = "container-lg py-4",
-        div(
-          class = "alert alert-info d-flex gap-2 align-items-start",
-          bsicons::bs_icon("info-circle"),
-          div(
-            tags$strong("Los diseños secuenciales requieren paquetes no disponibles en WASM."),
-            " Usa ", tags$code("gsDesign"), " o ", tags$code("rpact"),
-            " en R local con el código de ejemplo en la guía de arriba."
-          )
-        ),
-        bslib::card(
-          bslib::card_header("Recursos para diseños secuenciales"),
-          bslib::card_body(
-            tags$ul(
-              class = "mb-0",
-              tags$li(
-                tags$code("gsDesign"), " — ",
-                tags$a("keaven.github.io/gsDesign",
-                  href = "https://keaven.github.io/gsDesign/", target = "_blank"
-                )
-              ),
-              tags$li(
-                tags$code("rpact"), " — ",
-                tags$a("www.rpact.org",
-                  href = "https://www.rpact.org", target = "_blank"
-                )
-              ),
-              tags$li(
-                "Tutorial AGILE: ",
-                tags$a("doi.org/10.1186/s12874-022-01593-x",
-                  href = "https://doi.org/10.1186/s12874-022-01593-x",
-                  target = "_blank"
-                )
-              )
-            )
           )
         )
       )
+
     } else if (strategy == "prior") {
-      div(
-        class = "container-lg py-4",
+      tagList(
+        div(class = "container-lg py-2", strategy_details_es$prior()),
         div(
-          class = "alert alert-warning d-flex gap-2 align-items-start",
-          tags$span("⚠️"),
-          div(
-            tags$strong("Recuerda: "),
-            "no uses el efecto de un único estudio previo para calcular el poder.
-             Consulta la guía de arriba para ver las alternativas recomendadas
-             (meta-análisis, Small Telescopes)."
-          )
-        ),
-        bslib::card(
-          bslib::card_header("Recursos para replicaciones"),
-          bslib::card_body(
-            tags$ul(
-              class = "mb-0",
-              tags$li(
-                "Small Telescopes (Simonsohn, 2015): ",
-                tags$a("doi.org/10.1177/0956797614567341",
-                  href = "https://doi.org/10.1177/0956797614567341/", target = "_blank"
-                )
-              ),
-              tags$li(
-                tags$code("metafor"), " — meta-análisis con corrección de sesgo: ",
-                tags$a("metafor-project.org",
-                  href = "https://www.metafor-project.org/", target = "_blank"
-                )
-              ),
-              tags$li(
-                tags$code("puniform"), " — corrección de sesgo de publicación: ",
-                tags$a("CRAN",
-                  href = "https://cran.r-project.org/package=puniform",
-                  target = "_blank"
+          class = "container-lg py-4",
+          bslib::card(
+            bslib::card_header("Recursos para replicaciones"),
+            bslib::card_body(
+              tags$ul(
+                class = "mb-0",
+                tags$li(
+                  "Small Telescopes (Simonsohn, 2015): ",
+                  tags$a("doi.org/10.1177/0956797614567341",
+                    href = "https://doi.org/10.1177/0956797614567341/", target = "_blank"
+                  )
+                ),
+                tags$li(
+                  tags$code("metafor"), " — meta-análisis con corrección de sesgo: ",
+                  tags$a("metafor-project.org",
+                    href = "https://www.metafor-project.org/", target = "_blank"
+                  )
+                ),
+                tags$li(
+                  tags$code("puniform"), " — corrección de sesgo de publicación: ",
+                  tags$a("CRAN",
+                    href = "https://cran.r-project.org/package=puniform",
+                    target = "_blank"
+                  )
                 )
               )
             )
           )
         )
       )
+
     } else {
       NULL
     }
@@ -350,8 +370,8 @@ server <- function(input, output, session) {
     n <- ceiling((z_c / eps)^2 + 3)
     bslib::value_box(
       title = paste0(
-        "N requerido (IC ", round(conf * 100),
-        " %, ε = ±", eps, ")"
+        "N requerido (IC ", round(conf * 100),
+        " %, epsilon = ±", eps, ")"
       ),
       value = n,
       showcase = bsicons::bs_icon("people-fill"),
@@ -422,13 +442,13 @@ server <- function(input, output, session) {
       bslib::layout_columns(
         col_widths = c(6, 6),
         bslib::value_box(
-          title    = paste0("Poder con N = ", n, " (", res$n_label, ")"),
+          title    = paste0("Poder con N = ", n, " (", res$n_label, ")"),
           value    = paste0(round(res$power * 100, 1), "%"),
           showcase = bsicons::bs_icon("bar-chart-fill"),
           theme    = power_theme
         ),
         bslib::value_box(
-          title    = paste0("MDE al 80 %: ", res$mde_label),
+          title    = paste0("MDE al 80 %: ", res$mde_label),
           value    = round(res$mde, 3),
           showcase = bsicons::bs_icon("bullseye"),
           theme    = "secondary"
@@ -437,9 +457,9 @@ server <- function(input, output, session) {
       if (res$power < 0.80) {
         div(
           class = "alert alert-warning small mt-2",
-          "⚠️ Con este N el poder es ",
+          "Con este N el poder es ",
           paste0(round(res$power * 100, 1), "%"),
-          " — inferior al umbral convencional del 80 %. Considera si el
+          " — inferior al umbral convencional del 80 %. Considera si el
            estudio puede responder de forma informativa a tus preguntas de
            investigación."
         )

@@ -100,17 +100,16 @@ mod_intro_ui <- function(id) {
                   div(class = "jn-step-body",
                     tags$strong("Usa las herramientas interactivas"),
                     "Para estudios cuantitativos, aparecen calculadoras adaptadas a tu
-                     objetivo: poder (SESOI), precisión por IC, análisis inverso de poder,
-                     y más."
+                     objetivo: poder (SESOI), precisión por IC y análisis inverso de poder."
                   )
                 ),
                 div(class = "jn-step",
                   div(class = "jn-step-num"),
                   div(class = "jn-step-body",
                     tags$strong("Monte Carlo para diseños complejos"),
-                    "Al final de la pestaña Cuantitativo encontrarás código comentado
-                     para estimar poder por simulación cuando los paquetes estándar no
-                     cubren tu diseño."
+                    "Si el árbol de decisiones te lleva a la estrategia Confirmatorio (SESOI),
+                     aparecerá al final de esa sección código comentado para estimar poder
+                     por simulación cuando los paquetes estándar no cubren tu diseño."
                   )
                 )
               )

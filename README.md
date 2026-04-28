@@ -2,7 +2,7 @@
 
 # Just-N Framework: Aplicación Interactiva
 
-> **Just-N Framework: Interactive Application** — A Shiny app to guide researchers in deciding, applying, and justifying sample size strategies for quantitative, qualitative, and mixed-methods studies.
+> **Just-N Framework: Interactive Application**: A Shiny app to guide researchers in deciding, applying, and justifying sample size strategies for quantitative, qualitative, and mixed-methods studies.
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19860616.svg)](https://doi.org/10.5281/zenodo.19860616)
 
@@ -10,13 +10,13 @@
 
 ## Descripción
 
-**Just-N Framework: Aplicación Interactiva** es una aplicación Shiny que guía a investigadores —de cualquier disciplina y nivel— a decidir, aplicar y justificar la estrategia más adecuada para el tamaño de muestra de su estudio.
+**Just-N Framework: Aplicación Interactiva** es una aplicación Shiny que guía a investigadores de cualquier disciplina a decidir, aplicar y justificar la estrategia más adecuada para el tamaño de muestra de su estudio.
 
 La app cubre los tres grandes paradigmas de investigación:
 
-- **Cuantitativo** — poder estadístico (SESOI), precisión de estimaciones, diseños secuenciales, replicación, análisis inverso de poder y simulaciones Monte Carlo.
-- **Cualitativo** — saturación teórica y de datos, diversidad y representatividad, muestreo comunitario (CBPR), justificación narrativa y compromisos éticos.
-- **Mixto** — complementariedad cuanti–cuali en diseños integrados.
+- **Cuantitativo**: poder estadístico (SESOI), precisión de estimaciones, diseños secuenciales, replicación, análisis inverso de poder y simulaciones Monte Carlo.
+- **Cualitativo**: saturación teórica y de datos, diversidad y representatividad, muestreo comunitario (CBPR), justificación narrativa y compromisos éticos.
+- **Mixto**: complementariedad cuanti–cuali en diseños integrados.
 
 Incluye calculadoras interactivas (`pwr`, Fisher-z), árbol de decisiones parametrizado, guías metodológicas con referencias citables, y una bibliografía completa de las fuentes utilizadas.
 
@@ -81,7 +81,7 @@ Si usas esta app en tu investigación:
 
 Esta aplicación fue inspirada por la guía estática original:
 
-> Leongómez, J. D. (2025). *Just-N Framework* (v1.2). Zenodo. https://doi.org/10.5281/zenodo.16934468
+> Leongómez, J. D. (2025). *Just-N Framework* (v1.3). Zenodo. https://doi.org/10.5281/zenodo.16934468
 
 ---
 

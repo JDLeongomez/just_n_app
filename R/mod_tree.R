@@ -101,7 +101,7 @@ mod_tree_server <- function(id, initial_step = "type") {
           div(class = "d-grid gap-2",
             choice_btn(ns("q_confirm"),     "Confirmatorio \u2014 prueba de hip\u00f3tesis"),
             choice_btn(ns("q_descriptive"), "Descriptivo \u2014 estimaci\u00f3n de par\u00e1metros"),
-            choice_btn(ns("q_sequential"),  "Datos costosos o escasos"),
+            choice_btn(ns("q_sequential"),  "Diseño secuencial o adaptativo"),
             choice_btn(ns("q_prior"),       "Replicaci\u00f3n o comparabilidad"),
             choice_btn(ns("q_cost"),        "\u26a0\ufe0f  Recursos o tiempo muy limitados")
           )
@@ -170,11 +170,6 @@ mod_tree_server <- function(id, initial_step = "type") {
         )
       }
 
-      detail_content <- strategy_details_es[[state$strategy]]
-      detail_ui <- if (!is.null(detail_content)) {
-        div(class = "mt-3", detail_content())
-      }
-
       tagList(
         bslib::card(
           bslib::card_header(
@@ -193,8 +188,7 @@ mod_tree_server <- function(id, initial_step = "type") {
             tools_ui,
             refs_ui
           )
-        ),
-        detail_ui
+        )
       )
     })
 

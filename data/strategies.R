@@ -13,18 +13,6 @@ strategies <- list(
     refs    = c("lakensEquivalenceTestingPsychological2018", "lakensSampleSizeJustification2022")
   ),
 
-  power = list(
-    id       = "power",
-    type     = "quant",
-    name_es  = "Poder estad\u00edstico a priori",
-    when_es  = "Estudios confirmatorios con hip\u00f3tesis cl\u00e1sica; efecto esperado de literatura.",
-    tools    = c("pwr", "WebPower", "pwrss"),
-    warning  = TRUE,
-    warn_key = "warn_power",
-    refs     = c("cohen1992power", "buttonPowerFailureWhy2013", "correllAvoidCohensSmall2020",
-                 "albersWhenPowerAnalyses2018", "lakensSampleSizeJustification2022")
-  ),
-
   precision = list(
     id      = "precision",
     type    = "quant",
@@ -40,7 +28,10 @@ strategies <- list(
     id      = "sequential",
     type    = "quant",
     name_es = "Dise\u00f1os secuenciales / adaptativos",
-    when_es = "Datos costosos o escasos; posibilidad de detenci\u00f3n anticipada.",
+    when_es = paste0(
+      "Estudios con posibilidad de detenci\u00f3n anticipada o datos ",
+      "especialmente costosos de obtener."
+    ),
     tools   = c("gsDesign", "rpact"),
     warning = FALSE,
     refs    = c("pocockGroupSequentialMethods1977", "lakensSampleSizeJustification2022")

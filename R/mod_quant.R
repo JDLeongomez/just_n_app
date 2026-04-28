@@ -4,6 +4,22 @@ mod_quant_ui <- function(id) {
   ns <- NS(id)
   tagList(
     div(class = "container-lg py-4",
+
+      # ── Texto SESOI (visible por defecto) ───────────────────────────────────
+      strategy_details_es$sesoi(),
+
+      # ── Acordeón: literatura previa ─────────────────────────────────────────
+      bslib::accordion(
+        class = "mt-3 mb-4",
+        bslib::accordion_panel(
+          title = "Efectos de literatura previa: riesgos y alternativas",
+          icon  = bsicons::bs_icon("exclamation-triangle"),
+          strategy_details_es$prior()
+        ),
+        open = FALSE
+      ),
+
+      # ── Calculadoras ────────────────────────────────────────────────────────
       div(class = "mb-3",
         h2(i18n("quant_heading"), class = "mb-1"),
         p(class = "text-muted", i18n("quant_lead"))
@@ -60,7 +76,7 @@ mod_quant_ui <- function(id) {
                   tags$li(HTML("Convenciones de Cohen <em>solo como último recurso</em>."))
                 ),
                 div(class = "alert alert-warning small p-2 mb-0",
-                  HTML(paste0("\u26a0\ufe0f ", i18n("quant_cohen_warn"))))
+                  HTML(paste0("⚠️ ", i18n("quant_cohen_warn"))))
               )
             ),
             open = FALSE
@@ -80,22 +96,6 @@ mod_quant_ui <- function(id) {
             )
           )
         )
-      ),
-
-      # ── Contexto metodológico (ancho completo) ──────────────────────────────
-      bslib::accordion(
-        class = "mt-4",
-        bslib::accordion_panel(
-          title = "SESOI: cómo determinar el efecto mínimo de interés",
-          icon  = bsicons::bs_icon("bullseye"),
-          strategy_details_es$sesoi()
-        ),
-        bslib::accordion_panel(
-          title = "Efectos de literatura previa: riesgos y alternativas",
-          icon  = bsicons::bs_icon("exclamation-triangle"),
-          strategy_details_es$prior()
-        ),
-        open = FALSE
       )
     )
   )
@@ -124,9 +124,9 @@ mod_quant_server <- function(id) {
                      value = 3, min = 2, max = 20, step = 1)
       } else {
         alt_choices <- c(
-          "Bilateral (H\u2081: \u2260 0)"          = "two.sided",
-          "Direccional positiva (H\u2081: > 0)" = "greater",
-          "Direccional negativa (H\u2081: < 0)" = "less"
+          "Bilateral (H₁: ≠ 0)"          = "two.sided",
+          "Direccional positiva (H₁: > 0)" = "greater",
+          "Direccional negativa (H₁: < 0)" = "less"
         )
         radioButtons(ns("alternative"), i18n("quant_tails"), choices = alt_choices)
       }
@@ -217,8 +217,8 @@ mod_quant_server <- function(id) {
 
       plot(ns_range, pw_vals, type = "n",
            xlim = range(ns_range), ylim = c(0, 1),
-           xlab = "Tama\u00f1o de muestra (N)",
-           ylab = "Poder estad\u00edstico (1 \u2212 \u03b2)",
+           xlab = "Tamaño de muestra (N)",
+           ylab = "Poder estadístico (1 − β)",
            yaxt = "n", bty = "l")
 
       axis(2, at = seq(0, 1, 0.2),
