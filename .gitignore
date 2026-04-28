@@ -9,7 +9,6 @@ _dev/
 
 # Shinylive output
 _site/
-docs/
 
 # Sistema operativo
 .DS_Store
