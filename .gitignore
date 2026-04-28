@@ -1,0 +1,16 @@
+# Archivos de desarrollo (no forman parte de la app)
+_dev/
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# Shinylive output
+_site/
+docs/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

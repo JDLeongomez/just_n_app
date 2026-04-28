@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat)",
+      "Bash(python3 /tmp/patch_sesoi.py)",
+      "Bash(python3 /tmp/patch_sesoi2.py)",
+      "Bash(python3 /tmp/patch_mc.py)",
+      "Bash(Rscript -e ' *)",
+      "Bash(python3 -c ' *)",
+      "Bash(xxd)",
+      "Bash(perl -i -pe 's/\\\\\\\\\\\\$/$/' /home/jdl/Documents/GitHub/just_n_app/data/strategy_details_es.R)",
+      "Bash(sed -n '1052p' /home/jdl/Documents/GitHub/just_n_app/data/strategy_details_es.R)",
+      "Bash(grep -n 'resultado\\\\\\\\$\\\\|diseno\\\\\\\\$' /home/jdl/Documents/GitHub/just_n_app/R/mod_montecarlo.R)",
+      "Bash(python3)",
+      "Bash(sort -t: -k2 -n)"
+    ]
+  }
+}

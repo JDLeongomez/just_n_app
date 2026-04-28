@@ -1,0 +1,319 @@
+/* ── Just-N Framework — custom.css ─────────────────────────────────────── */
+
+/* Variables de color coherentes con el tema bslib */
+:root {
+  --jn-primary:   #4f46e5;
+  --jn-qual:      #059669;
+  --jn-mixed:     #d97706;
+  --jn-surface:   #f8f9ff;
+  --jn-border:    #e2e4f0;
+  --jn-shadow:    0 2px 12px rgba(79, 70, 229, 0.08);
+  --jn-shadow-lg: 0 8px 32px rgba(79, 70, 229, 0.13);
+}
+
+/* ── Navbar ── */
+.navbar {
+  box-shadow: 0 1px 0 var(--jn-border);
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+}
+.navbar-brand img { vertical-align: middle; }
+
+/* Subtítulo en el header: blanco semitransparente, respeta \n */
+.navbar-brand span.text-muted {
+  color: rgba(255, 255, 255, 0.72) !important;
+  white-space: pre-line;
+  line-height: 1.3;
+}
+
+/* Nav links */
+.nav-link { font-size: 0.88rem; font-weight: 500; letter-spacing: 0.01em; }
+
+/* Ítem activo: lila claro, visible sobre fondo índigo */
+.navbar .nav-link.active,
+.navbar .nav-link.active:focus {
+  color: #c4b5fd !important;   /* violet-300 */
+  font-weight: 600;
+}
+.navbar .nav-link:hover {
+  color: #ddd6fe !important;   /* violet-200 */
+}
+
+/* ── Hero (intro) ── */
+.jn-hero {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 60%, #a78bfa 100%);
+  color: #fff;
+  padding: 3.5rem 2rem 3rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.jn-hero::after {
+  content: "";
+  position: absolute;
+  right: -60px; top: -60px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+  pointer-events: none;
+}
+.jn-hero-logo {
+  width: 130px;
+  height: 130px;
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,0.18));
+}
+@media (max-width: 576px) {
+  .jn-hero-logo { width: 80px; height: 80px; }
+}
+
+.jn-hero h1 { font-size: 2.1rem; font-weight: 800; line-height: 1.15; }
+.jn-hero .lead { font-size: 1.05rem; opacity: 0.92; max-width: 640px; }
+.jn-hero .badge-doi {
+  display: inline-block;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 2rem;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.78rem;
+  color: #fff;
+  text-decoration: none;
+  margin-top: 1rem;
+  transition: background 0.2s;
+}
+.jn-hero .badge-doi:hover { background: rgba(255,255,255,0.28); color: #fff; }
+
+/* ── Feature cards (intro) ── */
+.jn-feature-card {
+  border: 1px solid var(--jn-border);
+  border-radius: 0.75rem;
+  padding: 1.4rem 1.2rem;
+  height: 100%;
+  transition: box-shadow 0.2s, transform 0.2s;
+  background: #fff;
+}
+.jn-feature-card:hover {
+  box-shadow: var(--jn-shadow-lg);
+  transform: translateY(-2px);
+}
+
+.jn-tab-link {
+  cursor: pointer;
+  text-decoration: none;
+}
+.jn-tab-link-hint {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--jn-primary);
+  margin-top: 0.75rem;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+.jn-tab-link:hover .jn-tab-link-hint {
+  opacity: 1;
+  transform: translateX(0);
+}
+.jn-feature-icon {
+  width: 44px; height: 44px;
+  border-radius: 0.6rem;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 0.9rem;
+}
+.jn-feature-card h5 { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.4rem; }
+.jn-feature-card p  { font-size: 0.85rem; color: #64748b; margin: 0; }
+
+/* ── Steps (intro: cómo funciona) ── */
+.jn-steps { counter-reset: step; }
+.jn-step {
+  display: flex; gap: 1rem; align-items: flex-start;
+  margin-bottom: 1.1rem;
+}
+.jn-step-num {
+  counter-increment: step;
+  flex-shrink: 0;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--jn-primary);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.jn-step-num::before { content: counter(step); }
+.jn-step-body { padding-top: 0.1rem; font-size: 0.9rem; }
+.jn-step-body strong { display: block; margin-bottom: 0.1rem; }
+
+/* ── Cards generales ── */
+.card {
+  border: 1px solid var(--jn-border) !important;
+  box-shadow: var(--jn-shadow);
+  border-radius: 0.75rem !important;
+}
+.card-header {
+  border-bottom: 1px solid var(--jn-border) !important;
+  background: var(--jn-surface) !important;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: 0.75rem 0.75rem 0 0 !important;
+  padding: 0.75rem 1.1rem !important;
+}
+
+/* ── Value box (resultado N) ── */
+.bslib-value-box .value-box-value { font-size: 3.2rem !important; font-weight: 800; }
+.bslib-value-box .value-box-showcase { padding: 0.5rem; }
+
+/* ── Árbol de decisiones ── */
+.jn-breadcrumb {
+  display: flex; gap: 0.4rem; align-items: center;
+  font-size: 0.78rem; color: #94a3b8;
+  margin-bottom: 1.2rem; flex-wrap: wrap;
+}
+.jn-breadcrumb span { color: #334155; font-weight: 500; }
+.jn-breadcrumb .sep { color: #cbd5e1; }
+
+.jn-question-label {
+  font-size: 1rem; font-weight: 600;
+  color: #1e293b; margin-bottom: 1rem;
+}
+
+.jn-choice-btn {
+  text-align: left !important;
+  white-space: normal !important;
+  border-radius: 0.6rem !important;
+  padding: 0.7rem 1rem !important;
+  font-size: 0.88rem !important;
+  border-width: 1.5px !important;
+  transition: all 0.15s !important;
+}
+.jn-choice-btn:hover {
+  transform: translateX(3px);
+  box-shadow: var(--jn-shadow) !important;
+}
+
+.jn-result-badge {
+  display: inline-block;
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.2rem 0.65rem;
+  border-radius: 2rem;
+  margin-bottom: 0.6rem;
+}
+
+.jn-tools-pill {
+  display: inline-block;
+  font-size: 0.78rem; font-weight: 600;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.4rem;
+  padding: 0.15rem 0.55rem;
+  margin: 0.1rem 0.15rem 0.1rem 0;
+  font-family: monospace;
+}
+
+/* ── Calculadoras ── */
+.jn-controls-card .card-body { background: var(--jn-surface); }
+.jn-plot-area { background: #fff; border-radius: 0.5rem; padding: 0.5rem; }
+
+/* ── Monte Carlo — bloque de código ── */
+.jn-code-block {
+  background: #1e1e2e;
+  color: #cdd6f4;
+  border-radius: 0.75rem;
+  padding: 1.4rem 1.6rem;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  overflow-x: auto;
+  white-space: pre;
+  font-family: "Fira Code", "Cascadia Code", ui-monospace, monospace;
+}
+
+/* ── Citas con popover ── */
+.jn-cite {
+  color: inherit;
+  text-decoration: underline dotted #94a3b8;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.jn-cite:hover { color: var(--jn-primary); text-decoration-color: var(--jn-primary); }
+
+.popover         { max-width: 360px; font-size: 0.82rem; }
+.popover-header  { font-weight: 600; font-size: 0.82rem; }
+.popover-body    { line-height: 1.5; }
+.popover-body em { font-style: italic; }
+
+/* ── Cajas de ejemplo (strategy_details_es) ── */
+.jn-example-card {
+  border: none !important;
+  border-radius: 0.75rem !important;
+  overflow: hidden;
+  box-shadow: var(--jn-shadow-lg) !important;
+}
+.jn-example-card .card-header {
+  background: linear-gradient(90deg, #4f46e5 0%, #7c3aed 100%) !important;
+  color: #fff !important;
+  border: none !important;
+}
+.jn-example-card .card-body {
+  background: #f5f3ff !important;
+}
+
+/* ── Separadores de sección ── */
+.jn-section-break {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+.jn-section-hr {
+  flex: 1;
+  border: none;
+  border-top: 2px solid var(--jn-border);
+  margin: 0;
+}
+.jn-section-tag {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+/* ── Botón "Comenzar de nuevo" ── */
+.jn-restart-btn {
+  background: #ede9fe;
+  color: #4f46e5;
+  border: none;
+  border-radius: 2rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.4rem 1.1rem;
+  letter-spacing: 0.01em;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+.jn-restart-btn:hover,
+.jn-restart-btn:focus {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: #fff !important;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.30);
+  transform: translateY(-1px);
+}
+.jn-restart-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.20);
+}
+
+/* ── Footer ── */
+.just-n-footer {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  border-top: 1px solid var(--jn-border);
+  padding: 0.65rem 1.5rem;
+  text-align: center;
+  background: var(--jn-surface);
+}
+.just-n-footer a { color: #64748b; }
