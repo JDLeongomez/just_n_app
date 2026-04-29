@@ -534,6 +534,32 @@ refs <- list(
     short = "O'Cathain et al., 2008",
     full  = "O'Cathain, A., Murphy, E., &amp; Nicholl, J. (2008). The quality of mixed methods studies in health services research. <em>Journal of Health Services Research &amp; Policy</em>, <em>13</em>(2), 92–98.",
     url   = "https://doi.org/10.1258/jhsrp.2007.007074"
+  ),
+
+  # --- Consulta Previa / FPIC ---
+
+  fitzpatrick2016consent = list(
+    short = "Fitzpatrick et al., 2016",
+    full  = "Fitzpatrick, E., Martiniuk, A., D'Antoine, H., Oscar, J., Carter, M., &amp; Elliott, E. (2016). Seeking consent for research with indigenous communities: a systematic review. <em>BMC Medical Ethics</em>, <em>17</em>, 65.",
+    url   = "https://doi.org/10.1186/s12910-016-0139-8"
+  ),
+
+  cancino2024ethics = list(
+    short = "Cancino-Jiménez et al., 2024",
+    full  = "Cancino-Jiménez, D., Valencia-Contrera, M., Rivera-Rojas, F., &amp; Villa-Velásquez, J. (2024). Ethical aspects in research con native peoples in America. <em>Southern Perspective / Perspectiva Austral</em>.",
+    url   = "https://doi.org/10.56294/pa2024.50"
+  ),
+
+  barrera2016fpic = list(
+    short = "Barrera-Hernández, 2016",
+    full  = "Barrera-Hernández, L. (2016). Indigenous peoples and free, prior, and informed consent in Latin America. En <em>The Human Right to Water</em> (pp. 75–92). Oxford University Press.",
+    url   = "https://doi.org/10.1093/acprof:oso/9780198767954.003.0005"
+  ),
+
+  mininteriorConsultaPrevia = list(
+    short = "Ministerio del Interior, s.f.",
+    full  = "Ministerio del Interior. (s.f.). <em>Proceso de consulta previa</em>. Gobierno de Colombia. Recuperado el 29 de abril de 2026.",
+    url   = "https://www.mininterior.gov.co/proceso-de-consuta-previa/"
   )
 
 )

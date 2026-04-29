@@ -22,6 +22,7 @@ source("R/mod_quant.R")
 source("R/mod_montecarlo.R")
 source("R/mod_mixed.R")
 source("R/mod_qual_resources.R")
+source("R/mod_consulta_previa.R")
 source("R/mod_bibliography.R")
 
 # ── UI ──────────────────────────────────────────────────────────────────────
@@ -96,6 +97,7 @@ ui <- page_navbar(
   nav_panel(
     title = "Cualitativo",
     icon = bsicons::bs_icon("people"),
+    consulta_previa_card(),
     mod_tree_ui("tree_qual", initial_step = "qual"),
     uiOutput("qual_detail_panel"),
     mod_qual_resources_ui("qual_res")

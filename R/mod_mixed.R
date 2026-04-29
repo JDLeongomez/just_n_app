@@ -4,6 +4,7 @@ mod_mixed_ui <- function(id) {
   ns <- NS(id)
   s  <- strategies[["mixed"]]
   tagList(
+    consulta_previa_card(),
     div(class = "container-lg py-4",
       h2("Diseño mixto", class = "mb-1"),
       p(class = "lead", s$when_es),

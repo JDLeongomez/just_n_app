@@ -243,9 +243,21 @@ mod_bibliography_ui <- function(id) {
           )
         ),
 
-        # ── 12. Recursos del autor ────────────────────────────────────────────
+        # ── 12. Consulta Previa / FPIC ────────────────────────────────────────
         bib_section(
-          "p12", "person-badge",
+          "p12", "exclamation-triangle-fill",
+          "Consulta Previa / Consentimiento Libre, Previo e Informado (CLPI)",
+          c(
+            "fitzpatrick2016consent",
+            "cancino2024ethics",
+            "barrera2016fpic",
+            "mininteriorConsultaPrevia"
+          )
+        ),
+
+        # ── 13. Recursos del autor ────────────────────────────────────────────
+        bib_section(
+          "p13", "person-badge",
           "Recursos del autor",
           c(
             "leongomez2025justn",
