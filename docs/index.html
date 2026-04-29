@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="app-version" content="20260429174858" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Just-N Framework: Aplicación Interactiva</title>
     <link rel="icon" type="image/svg+xml" href="just-n-logo.svg" />
@@ -20,6 +21,22 @@
     <link rel="stylesheet" href="./shinylive/style-resets.css" />
     <link rel="stylesheet" href="./shinylive/shinylive.css" />
     
+    <script>
+      (function() {
+        var v = document.querySelector('meta[name="app-version"]').getAttribute('content');
+        if (localStorage.getItem('swVersion') !== v) {
+          localStorage.setItem('swVersion', v);
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(rs) {
+              if (rs.length > 0) {
+                rs.forEach(function(r) { r.unregister(); });
+                location.reload();
+              }
+            });
+          }
+        }
+      })();
+    </script>
   </head>
   <body>
     
