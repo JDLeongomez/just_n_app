@@ -56,6 +56,17 @@ ui <- page_navbar(
           if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 200);
       });
+
+      document.addEventListener('DOMContentLoaded', function() {
+        if (window.innerWidth < 768) {
+          var banner = document.createElement('div');
+          banner.className = 'alert alert-warning alert-dismissible fade show m-0 rounded-0';
+          banner.setAttribute('role', 'alert');
+          banner.style.cssText = 'position: sticky; top: 56px; z-index: 1040; font-size: 0.85rem; border-left: none; border-right: none;';
+          banner.innerHTML = '<strong>💻 Mejor experiencia en computador:</strong> Esta aplicación está diseñada para pantallas grandes. Para aprovecharla al máximo, ábrela en un computador o tableta. <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Cerrar\"></button>';
+          document.body.prepend(banner);
+        }
+      });
     "))
   ),
   footer = div(
