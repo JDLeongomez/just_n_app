@@ -361,7 +361,7 @@ strategy_details_es <- list(
         cite_refs(c("nelsonUsingConceptualDepth2017", "saunders2018saturation", "mouraMethodologicalPathReach2022", "nascimentoTheoreticalSaturationQualitative2018")), "."
       ),
       p(
-        "Es un proceso gradual, no un instante exacto: el investigador, analizando de
+        "Es un proceso gradual en el que el investigador, analizando de
        forma continua lo que recoge, va ganando confianza en que las categorías tienen
        propiedades, dimensiones y variaciones bien descritas y que los nuevos datos solo
        repiten o ilustran lo ya entendido",
@@ -468,7 +468,34 @@ strategy_details_es <- list(
        como “6+2”: seis entrevistas hasta el punto de saturación más dos
        adicionales para confirmarlo. Este enfoque es fácil de aplicar, no requiere
        supuestos estadísticos y permite ajustar el nivel de rigor según las decisiones
-       del investigador.")
+       del investigador."),
+      div(
+        class = "card jn-example-card mt-3",
+        div(
+          class = "card-header py-2",
+          tags$strong("Ejemplo de aplicación")
+        ),
+        div(
+          class = "card-body py-2",
+          p(
+            "Un equipo investiga las barreras percibidas para adherirse a un
+           tratamiento crónico mediante entrevistas semiestructuradas. Cada
+           entrevista se transcribe y codifica antes de programar la
+           siguiente, y el muestreo teórico orienta a quién reclutar después
+           para poner a prueba las categorías emergentes",
+            cite_refs(c("nelsonUsingConceptualDepth2017", "barbourTheoreticalSampling2022")),
+            ". Siguiendo la técnica de bloques, analizan primero 5 entrevistas
+           iniciales e identifican 29 temas relacionados con barreras
+           logísticas, emocionales y relacionales. Los dos bloques siguientes,
+           de 2 entrevistas cada uno, aportan solo 1 y 0 temas nuevos
+           respectivamente (menos del 5 % de información nueva)",
+            cite_ref("guestSimpleMethodAssess2020"),
+            ". El equipo considera alcanzada la saturación temática en la
+           entrevista 7 y realiza 2 entrevistas adicionales de confirmación,
+           reportando el resultado como “7+2” (9 entrevistas en total)."
+          )
+        )
+      )
     )
   },
 
@@ -1013,7 +1040,7 @@ ss.aipe.smd(delta = 0.50, conf.level = 0.95, width = 0.40)"
       div(
         class = "alert alert-info small mt-3",
         bsicons::bs_icon("info-circle"),
-        " MBESS no está disponible en esta app (WASM). Usa estos códigos en R
+        " MBESS no está disponible en esta app. Usa estos códigos en R
        local. Como primera aproximación interactiva, usa la calculadora de poder
        con un poder objetivo alto (\u2265 95\u00a0%). Esto garantiza estimaciones
        más precisas y curvas de poder más pronunciadas."
@@ -1111,12 +1138,12 @@ n_por_precision(epsilon = 0.10)  # \u2248 387 participantes"
             tags$tr(
               tags$td(tags$code("gsDesign")),
               tags$td("Diseños de grupo secuencial clásicos (O'Brien-Fleming, Pocock)"),
-              tags$td("Instalación local — no disponible en WASM")
+              tags$td("Instalación local — no disponible en esta app")
             ),
             tags$tr(
               tags$td(tags$code("rpact")),
               tags$td("Diseños adaptativos confirmatorios completos"),
-              tags$td("Instalación local — no disponible en WASM")
+              tags$td("Instalación local — no disponible en esta app")
             )
           )
         )

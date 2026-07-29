@@ -299,7 +299,7 @@ server <- function(input, output, session) {
             class = "alert alert-info d-flex gap-2 align-items-start",
             bsicons::bs_icon("info-circle"),
             div(
-              tags$strong("Los diseños secuenciales requieren paquetes no disponibles en WASM."),
+              tags$strong("Los diseños secuenciales requieren paquetes no disponibles en esta app."),
               " Usa ", tags$code("gsDesign"), " o ", tags$code("rpact"),
               " en R local con el código de ejemplo en la guía arriba."
             )
@@ -394,7 +394,11 @@ server <- function(input, output, session) {
 
   # Calculadora inversa de poder (reactiva a los inputs, sin botón)
   output$cost_result_ui <- renderUI({
-    req(input$cost_n, input$cost_alpha, input$cost_effect, input$cost_design)
+    req(input$cost_design)
+    if (is.null(input$cost_n) || is.null(input$cost_alpha) || is.null(input$cost_effect)) {
+      return(div(class = "alert alert-light border text-muted small",
+        bsicons::bs_icon("info-circle"), " Completa todos los campos para ver el resultado."))
+    }
     n <- input$cost_n
     alpha <- input$cost_alpha
     effect <- input$cost_effect
@@ -442,11 +446,15 @@ server <- function(input, output, session) {
           list(power = pw, mde = mde, mde_label = "f (Cohen)", n_label = "por grupo")
         }
       ),
-      error = function(e) list(error = e$message)
+      error = function(e) list(error = TRUE)
     )
 
     if (!is.null(res$error)) {
-      return(div(class = "alert alert-danger small", res$error))
+      return(div(class = "alert alert-danger small",
+        bsicons::bs_icon("exclamation-triangle-fill"),
+        " No fue posible calcular el resultado con estos valores. Verifica que
+         los parámetros estén dentro de rangos válidos (por ejemplo, alfa y
+         poder deben estar entre 0 y 1, y el tamaño de efecto no puede ser cero)."))
     }
 
     power_theme <- if (res$power >= 0.80) "success" else if (res$power >= 0.50) "warning" else "danger"

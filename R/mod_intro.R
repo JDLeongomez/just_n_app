@@ -34,7 +34,7 @@ mod_intro_ui <- function(id) {
             div(class = "jn-feature-icon",
                 style = "background:#ede9fe; color:#4f46e5;", "\U0001F4CA"),
             h5("Cuantitativo"),
-            p("Poder estadístico, precisión, SESOI, diseños secuenciales y más. Calculadoras integradas."),
+            p("Poder estadístico, precisión, SESOI (el efecto mínimo que te interesa detectar), diseños secuenciales y más. Calculadoras integradas."),
             div(class = "jn-tab-link-hint", bsicons::bs_icon("arrow-right-circle"), " Ir a Cuantitativo")
           )
         ),

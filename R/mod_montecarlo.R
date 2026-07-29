@@ -83,7 +83,7 @@ mod_montecarlo_ui <- function(id) {
                 class = "alert alert-warning small",
                 bsicons::bs_icon("exclamation-triangle-fill"), " ",
                 tags$strong("Superpower"),
-                " no está disponible en esta app (WASM). Usa los ejemplos de
+                " no está disponible en esta app. Usa los ejemplos de
                  código siguientes en R local."
               ),
               h6(

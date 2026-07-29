@@ -113,22 +113,38 @@ mod_qual_resources_ui <- function(id) {
                 ),
                 tags$tbody(
                   tags$tr(
-                    tags$td(tags$strong("COREQ")),
+                    tags$td(
+                      tags$strong("COREQ"), tags$br(),
+                      tags$span(class = "text-muted", style = "font-size:0.85em;",
+                        "Consolidated Criteria for Reporting Qualitative Research")
+                    ),
                     tags$td("Entrevistas y grupos focales"),
                     tags$td(cite_ref("tongConsolidatedCriteriaReporting2007"))
                   ),
                   tags$tr(
-                    tags$td(tags$strong("SRQR")),
+                    tags$td(
+                      tags$strong("SRQR"), tags$br(),
+                      tags$span(class = "text-muted", style = "font-size:0.85em;",
+                        "Standards for Reporting Qualitative Research")
+                    ),
                     tags$td("Investigación cualitativa general"),
                     tags$td(cite_ref("obrienStandardsReportingQualitative2014"))
                   ),
                   tags$tr(
-                    tags$td(tags$strong("ENTREQ")),
+                    tags$td(
+                      tags$strong("ENTREQ"), tags$br(),
+                      tags$span(class = "text-muted", style = "font-size:0.85em;",
+                        "Enhancing Transparency in Reporting the Synthesis of Qualitative Research")
+                    ),
                     tags$td("Síntesis cualitativa"),
                     tags$td(cite_ref("tongEnhancingTransparencyReporting2012"))
                   ),
                   tags$tr(
-                    tags$td(tags$strong("GRAMMS")),
+                    tags$td(
+                      tags$strong("GRAMMS"), tags$br(),
+                      tags$span(class = "text-muted", style = "font-size:0.85em;",
+                        "Good Reporting of A Mixed Methods Study")
+                    ),
                     tags$td("Diseños mixtos"),
                     tags$td(cite_ref("ocathainQualityMixedMethods2008"))
                   )

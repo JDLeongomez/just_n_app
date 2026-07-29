@@ -133,7 +133,9 @@ mod_quant_server <- function(id) {
     })
 
     result <- eventReactive(input$calc, {
-      req(input$effect, input$alpha, input$power_target)
+      if (is.null(input$alpha) || is.null(input$power_target)) {
+        return(list(empty = TRUE))
+      }
       e  <- input$effect
       a  <- input$alpha
       pw <- input$power_target
@@ -166,14 +168,22 @@ mod_quant_server <- function(id) {
                  design = "anova", e = e, a = a, alt = "two.sided", k = k)
           }
         ),
-        error = function(err) list(error = conditionMessage(err))
+        error = function(err) list(error = TRUE)
       )
     })
 
     output$result_ui <- renderUI({
       res <- result()
+      if (!is.null(res$empty)) {
+        return(div(class = "alert alert-light border text-muted small",
+          bsicons::bs_icon("info-circle"), " Completa alfa y el poder objetivo antes de calcular."))
+      }
       if (!is.null(res$error)) {
-        return(div(class = "alert alert-danger", res$error))
+        return(div(class = "alert alert-danger",
+          bsicons::bs_icon("exclamation-triangle-fill"),
+          " No fue posible calcular el resultado con estos valores. Verifica que
+           los parámetros estén dentro de rangos válidos (por ejemplo, alfa y
+           poder deben estar entre 0 y 1, y el tamaño de efecto no puede ser cero)."))
       }
       bslib::value_box(
         title    = paste(i18n("quant_result_n"), res$label),
@@ -202,7 +212,7 @@ mod_quant_server <- function(id) {
 
     output$power_plot <- renderPlot({
       res <- result()
-      req(!is.null(res) && is.null(res$error))
+      req(!is.null(res) && is.null(res$error) && is.null(res$empty))
 
       half      <- max(60, round(res$n * 0.6))
       ns_range  <- seq(max(5, res$n - half), res$n + half, length.out = 120)

@@ -112,7 +112,7 @@ mod_tree_server <- function(id, initial_step = "type") {
           div(class = "d-grid gap-2",
             choice_btn(ns("qual_sat"), "Exploratorio / Tem\u00e1tico / Teor\u00eda fundamentada", "success"),
             choice_btn(ns("qual_div"), "M\u00faltiples subgrupos o perspectivas", "success"),
-            choice_btn(ns("qual_com"), "Investigaci\u00f3n participativa (CBPR)", "success"),
+            choice_btn(ns("qual_com"), "Investigaci\u00f3n participativa \u2014 con y para la comunidad (CBPR)", "success"),
             choice_btn(ns("qual_nar"), "Caso \u00fanico / Etnograf\u00eda", "success"),
             choice_btn(ns("qual_eth"), "Comunidades vulnerables", "success")
           )
